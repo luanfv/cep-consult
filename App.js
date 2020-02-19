@@ -1,14 +1,15 @@
 import React, {useState, useEffect} from 'react'
 import {View, Text, TextInput} from 'react-native'
-import {Background, Body, ButtonStyled, ButtonText, Title, CepInput, CepViewInput} from './styled'
+import {Background, Body, ButtonStyled, ButtonText, Title, CepInput, CepViewInput, WarningText} from './styled'
 import {handleCep} from './src/services/api'
 
 export default () => 
 {
-  const [cep, setCep] = useState()
-  const [cepData, setCepData] = useState()
+  const [cep, setCep] = useState('')
+  const [cepData, setCepData] = useState('')
+  const [warning, setWarning] = useState('')
 
-  const formatCep = async (inputCep) =>
+  const formatCep = (inputCep) =>
   {
     let number = inputCep.replace(/[^\d]+/g,'')
 
@@ -18,16 +19,25 @@ export default () =>
     if(number.length > 5)
       number = `${number.substring(0,5)}-${number.substring(5,8)}`
   
-    await setCep(number)
+    setCep(number)
   }
 
-  const handleDataCep = async () =>
+  const handleDataCep = () =>
   {
+    setWarning('')
     if(cep.length === 9)
     {
-      const response = await handleCep(cep)
-      setCepData(response.data)
-      console.log(cepData)
+      handleCep.get(`${cep}/json/`)
+      .then((response) => {
+        response.data.erro ? setWarning('CEP não encontrado') : setCepData(response.data)
+      })
+      .catch(() => {
+        setWarning('Verifique sua conexão')
+      })
+    }
+    else
+    {
+      setWarning('CEP deve conter 8 digitos')
     }
   }
 
@@ -40,9 +50,13 @@ export default () =>
           <Body>
             <Title>Consulte um CEP</Title>
 
-            <CepViewInput>
+            <View>
+              <CepViewInput>
                 <CepInput placeholder="Informe o CEP" value={cep} onChangeText={async e => await formatCep(e)} />
-            </CepViewInput>
+              </CepViewInput>
+
+              <WarningText>{warning}</WarningText>
+            </View>
 
             <View>
               <ButtonStyled onPress={() => handleDataCep()}>

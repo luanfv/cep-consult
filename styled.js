@@ -50,3 +50,9 @@ export const CepViewInput = styled(View)`
     border: #A4A4A4 solid 2px;
     border-radius: 5px;
 `
+
+export const WarningText = styled(Text)`
+    padding-top: 5px;
+    color: #A91D1D;
+    text-align: center;
+`
