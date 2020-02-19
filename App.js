@@ -52,7 +52,8 @@ export default () =>
 
             <View>
               <CepViewInput>
-                <CepInput placeholder="Informe o CEP" value={cep} onChangeText={async e => await formatCep(e)} />
+                <CepInput placeholder="Informe o CEP" maxLength={9} keyboardType={'numeric'}
+                value={cep} onChangeText={e => formatCep(e)} />
               </CepViewInput>
 
               <WarningText>{warning}</WarningText>

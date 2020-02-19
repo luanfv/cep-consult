@@ -9,7 +9,9 @@ export const Background = styled(View)`
 
 export const Body = styled(View)`
     width: 80%;
+    max-width: 300px;
     height: 60%;
+    max-height: 400px;
     margin: auto;
     border-radius: 15px;
     background: #fff;
