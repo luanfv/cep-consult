@@ -1,13 +1,12 @@
 {
   "expo": {
-    "name": "Blank Template",
-    "slug": "todo",
+    "name": "CEP Consult",
+    "slug": "CepConsult",
     "privacy": "public",
     "sdkVersion": "36.0.0",
     "platforms": [
       "ios",
-      "android",
-      "web"
+      "android"
     ],
     "version": "1.0.0",
     "orientation": "portrait",

@@ -13,10 +13,16 @@ export const Body = styled(View)`
     margin: auto;
     border-radius: 15px;
     background: #fff;
+    padding: 10px; 
 
     display: flex;
     align-items: center;
     justify-content: space-around;
+`
+
+export const Title = styled(Text)`
+    font-size: 24px;
+    font-weight: 700;
 `
 
 export const ButtonStyled = styled(TouchableHighlight)`
@@ -31,4 +37,16 @@ export const ButtonText = styled(Text)`
     margin: auto;
     color: #fff;
     font-size: 16px;
+`
+
+export const CepInput = styled(TextInput)`
+    width: 1000px;
+    max-width: 90%;
+    padding: 5px 15px;
+    font-size: 16px;    
+`
+
+export const CepViewInput = styled(View)`
+    border: #A4A4A4 solid 2px;
+    border-radius: 5px;
 `
