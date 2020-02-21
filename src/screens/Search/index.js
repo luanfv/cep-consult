@@ -1,12 +1,11 @@
 import React, {useState, useEffect} from 'react'
-import {View, Text, TextInput} from 'react-native'
+import {View} from 'react-native'
 import {Background, Body, ButtonStyled, ButtonText, Title, CepInput, CepViewInput, WarningText} from './styled'
 import {handleCep} from './../../services/api'
 
 export default ({ navigation }) => 
 {
   const [cep, setCep] = useState('')
-  const [cepData, setCepData] = useState('')
   const [warning, setWarning] = useState('')
 
   const formatCep = (inputCep) =>
@@ -34,7 +33,7 @@ export default ({ navigation }) =>
         ? 
         setWarning('CEP não encontrado') 
         : 
-        navigation.navigate('Informações', {dataCep: response.data})
+        navigation.push('Informações', {dataCep: response.data})
       })
       .catch(() => {
         setWarning('Verifique sua conexão')
@@ -51,26 +50,24 @@ export default ({ navigation }) =>
   }, [cep])
 
   return (
-      <Background>
-          <Body>
-            <Title>Consulte um CEP</Title>
+    <Body>
+      <Title>Consulte um CEP</Title>
 
-            <View>
-              <CepViewInput>
-                <CepInput placeholder="Informe o CEP" maxLength={9} keyboardType={'numeric'}
-                value={cep} onChangeText={e => formatCep(e)} />
-              </CepViewInput>
+      <View>
+        <CepViewInput>
+          <CepInput placeholder="Informe o CEP" maxLength={9} keyboardType={'numeric'}
+          value={cep} onChangeText={e => formatCep(e)} />
+        </CepViewInput>
 
-              <WarningText>{warning}</WarningText>
-            </View>
+        <WarningText>{warning}</WarningText>
+      </View>
 
-            <View>
-              <ButtonStyled onPress={() => handleDataCep()}>
-                <ButtonText>Buscar</ButtonText>
-              </ButtonStyled>
-            </View>
-            
-          </Body>
-      </Background>
+      <View>
+        <ButtonStyled onPress={() => handleDataCep()}>
+          <ButtonText>Buscar</ButtonText>
+        </ButtonStyled>
+      </View>
+      
+    </Body>
   )
 }
