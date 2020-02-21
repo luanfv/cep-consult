@@ -34,7 +34,7 @@ export default ({ navigation }) =>
         ? 
         setWarning('CEP não encontrado') 
         : 
-        navigation.navigate('Informações do CEP', {dataCep: response.data})
+        navigation.navigate('Informações', {dataCep: response.data})
       })
       .catch(() => {
         setWarning('Verifique sua conexão')
